@@ -35,9 +35,9 @@ const Main = () => {
         <S.Option id="third" onMouseEnter={handleMouseEnter}>
           <S.Select id={`${hovers.third}`} src={Arrow} />
           <S.Text>
-            <a href="https://github.com/sebanimm" target="_blank">
+            <Link to="https://github.com/sebanimm" target="_blank">
               개발한놈 깃허브
-            </a>
+            </Link>
           </S.Text>
         </S.Option>
       </S.Options>
