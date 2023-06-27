@@ -14,6 +14,10 @@ export const Game = styled.div`
   outline: 2px solid black;
   border-radius: 10px;
   cursor: pointer;
+
+  img {
+    border-radius: 10px;
+  }
 `;
 
 export const GameName = styled.div`
