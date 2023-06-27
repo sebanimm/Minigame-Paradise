@@ -16,16 +16,18 @@ import {
   INITIAL_POS,
   INITIAL_SCORE,
 } from "@/constants/flyfly";
+import GameOver from "@components/GameOver";
 
 const FlyFly = () => {
   const [isStart, setIsStart] = useState<boolean>(false);
   const [birdpos, setBirspos] = useState<number>(INITIAL_POS);
   const [objHeight, setObjHeight] = useState<number>(INITIAL_HEIGHT);
   const [objPos, setObjPos] = useState<number>(WALL_WIDTH);
-  const [score, setScore] = useState<number>(INITIAL_SCORE);
+  const [currentScore, setCurrentScore] = useState<number>(INITIAL_SCORE);
+  const [isGameOver, setIsGameOver] = useState<boolean>(true);
 
   useEffect(() => {
-    let intVal: number;
+    let intVal: any;
     if (isStart && birdpos < WALL_HEIGHT - BIRD_HEIGHT) {
       intVal = setInterval(() => {
         setBirspos((birdpos) => birdpos + GRAVITY);
@@ -35,7 +37,7 @@ const FlyFly = () => {
   });
 
   useEffect(() => {
-    let objval: number;
+    let objval: any;
     if (isStart && objPos >= -OBJ_WIDTH) {
       objval = setInterval(() => {
         setObjPos((objPos) => objPos - OBJ_SPEED);
@@ -47,7 +49,7 @@ const FlyFly = () => {
     } else {
       setObjPos(WALL_WIDTH);
       setObjHeight(Math.floor(Math.random() * (WALL_HEIGHT - OBJ_GAP)));
-      if (isStart) setScore((score) => score + 1);
+      if (isStart) setCurrentScore((currentScore) => currentScore + 1);
     }
   }, [isStart, objPos]);
 
@@ -59,22 +61,37 @@ const FlyFly = () => {
 
     if (objPos >= OBJ_WIDTH && objPos <= OBJ_WIDTH + 80 && (topObj || bottomObj)) {
       setIsStart(false);
-      setBirspos(300);
-      setScore(0);
+      setIsGameOver(false);
+      setBirspos(INITIAL_POS);
     }
   }, [isStart, birdpos, objHeight, objPos]);
 
   const handler = () => {
+    if (!isGameOver && !isStart) {
+      setIsGameOver(true);
+      setCurrentScore(INITIAL_SCORE);
+    }
     if (!isStart) setIsStart(true);
     else if (birdpos < BIRD_HEIGHT) setBirspos(0);
     else setBirspos((birdpos) => birdpos - 50);
   };
 
+  useEffect(() => {
+    const score = window.localStorage.getItem("flyfly-score");
+    if (score === "0") {
+      window.localStorage.setItem("flyfly-score", currentScore.toString());
+    }
+    if (score !== null && currentScore > parseInt(score)) {
+      window.localStorage.setItem("flyfly-score", currentScore.toString());
+    }
+  }, [isGameOver]);
+  // 1. 점수갱신
   return (
     <S.Home onClick={handler}>
-      <span>Score: {score}</span>
+      <span>Score: {currentScore}</span>
       <S.Background height={WALL_HEIGHT} width={WALL_WIDTH} url={Background}>
         {!isStart ? <S.Startboard>Click To Start</S.Startboard> : null}
+        {!isGameOver ? <GameOver /> : null}
         <S.Obj
           height={objHeight}
           width={OBJ_WIDTH}
