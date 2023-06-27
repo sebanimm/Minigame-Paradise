@@ -17,6 +17,19 @@ a:link, a:visited {
   text-decoration: none;
   color: black;
 }
+
+input {
+  border: none;
+	outline: none;
+}
+
+::placeholder {
+  color: black;
+}
+
+button {  
+  border: none;
+}
 `;
 
 export default GlobalStyle;
