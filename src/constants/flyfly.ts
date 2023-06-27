@@ -1,0 +1,11 @@
+export const BIRD_HEIGHT = 28;
+export const BIRD_WIDTH = 33;
+export const WALL_HEIGHT = 600;
+export const WALL_WIDTH = 400;
+export const GRAVITY = 8;
+export const OBJ_WIDTH = 52;
+export const OBJ_SPEED = 6;
+export const OBJ_GAP = 200;
+export const INITIAL_POS = 300;
+export const INITIAL_HEIGHT = 0;
+export const INITIAL_SCORE = 0;
