@@ -4,21 +4,20 @@ const options: OptionsType[] = [
   {
     id: 0,
     name: "first",
-    text: "게임 시작",
-    link: "/selection",
+    text: "다시하기",
+    link: "",
   },
   {
     id: 1,
     name: "second",
-    text: "게임 소개",
-    link: "/introduction",
+    text: "랭킹 보기",
+    link: "/ranking",
   },
   {
     id: 2,
     name: "third",
-    text: "개발한놈 깃허브",
-    link: "https://github.com/sebanimm",
-    blank: true,
+    text: "홈으로",
+    link: "/",
   },
 ];
 

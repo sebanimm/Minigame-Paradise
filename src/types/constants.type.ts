@@ -1,4 +1,4 @@
-export interface MainOptionsType {
+export interface OptionsType {
   id: number;
   name: string;
   text: string;
