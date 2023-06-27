@@ -2,10 +2,9 @@ import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import Arrow from "@/assets/arrow.svg";
-import options from "@/constants/main.options";
 import { ArrowType } from "@/types/components.type";
 
-const Options = () => {
+const Options = ({ options }: any) => {
   const [arrow, setArrow] = React.useState<ArrowType>({
     first: false,
     second: false,
@@ -19,7 +18,7 @@ const Options = () => {
 
   return (
     <S.Container>
-      {options.map((obj) => (
+      {options.map((obj: any) => (
         <S.Option key={obj.id} id={obj.name} onMouseEnter={handleMouseEnter}>
           <S.Select id={`${arrow[obj.name]}`} src={Arrow} />
           <S.Text>
