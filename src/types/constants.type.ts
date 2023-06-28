@@ -5,3 +5,10 @@ export interface OptionsType {
   link: string;
   blank?: boolean;
 }
+
+export interface GameListType {
+  id: number;
+  name: string;
+  src: string;
+  link: string;
+}
